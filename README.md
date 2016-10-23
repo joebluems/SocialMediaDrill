@@ -162,7 +162,7 @@ flatten(t.flatdata.likes.data) `likes` from
 +---------------------------------+-----------------------------------------------------+
 10 rows selected (0.127 seconds)
 ```
-XXX
+Use nested <b>flatten</b> commands to generate the comments for each message. You can also extract the sender of the comments and other information. Note that when you explore real social data, you must be prepared for content that some might find offensive...
 ```
 0: jdbc:drill:zk=local> select substr(f.message,1,70) `message`,
   substr(f.comment.message,1,50) `comment` from 
@@ -228,7 +228,6 @@ XXX
 | New MTA LIRR Concourse and redesign for MTA New Yo  | Delays  Posted: 09/29/2016  8:29AM 
 | New MTA LIRR Concourse and redesign for MTA New Yo  | Wasn't there discussion of LIRR having a hub in lo        |
 | New MTA LIRR Concourse and redesign for MTA New Yo  | December 2020... lol 😂                                   |
-| New MTA LIRR Concourse and redesign for MTA New Yo  | Fucking idiots                                            |
 +-----------------------------------------------------+-----------------------------------------------------------+
 50 rows selected (0.224 seconds)
 ```
