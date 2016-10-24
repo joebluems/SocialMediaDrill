@@ -231,5 +231,208 @@ Use nested <b>flatten</b> commands to generate the comments for each message. Yo
 +-----------------------------------------------------+-----------------------------------------------------------+
 50 rows selected (0.224 seconds)
 ```
+## Shake Shack
+People take hamburgers very seriously. Display some messages and comments from the Shake Shack feed…
+```
+0: jdbc:drill:zk=local> select substr(f.message,1,70) `message`,
+  substr(f.comment.message,1,50) `comment` from 
+   (
+    select 
+      substr(t.flatdata.message,1,50) `message`,
+      flatten(t.flatdata.comments.data) `comment`
+      from 
+      (select flatten(data) as flatdata from
+        dfs.`/Users/joeblue/sentiment/burger.json`
+      ) t
+   ) f
+ limit 50;
++-----------------------------------------------------+-----------------------------------------------------+
+|                       message                       |                       comment                       |
++-----------------------------------------------------+-----------------------------------------------------+
+| WhoSay's Rob Gregory is having a delicious convers  | Will you guys ever put a shake shack in the coney   |
+| WhoSay's Rob Gregory is having a delicious convers  | Hey                                                 |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Please stop sharing stuff like this!!!! I am starv  |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Yassssss Moises Castillo finally something i might  |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Crispy, sexy, crinkly, yummy.                       |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Omg! I will tear this thing up!                     |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  |                                                     |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | I need this 😍                                      |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Well that's a giant chicken sandwich.               |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Is that chicken?  Wow that looks goooood            |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | This is so, darn good.                              |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Cluck, cluck baby.                                  |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Osgood                                              |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  |                                                     |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Looks so good.                                      |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | That is what up i can get down on one them          |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Do you deliver!!!                                   |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | My fantasy                                          |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Samah Khasawneh T5aiale heeik Akel w 2a3deh 3ndk b  |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | DAAAAMN!!!!                                         |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | I can taste the crispy                              |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | looks like the Big Shack                            |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Kimberly Hitt I need this in my life                |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Mmmm                                                |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Jermaine Jenkins love me some Shake Shack!!         |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Mmmmmmm....                                         |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Margarita Nava Aguilar, una idea para el domingo.   |
+| At the Flyers Game -Burger was cold - small portio  | Hi there! Would you mind sending us an email at sh  |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Every bite is the weekend.                          |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Steffi Loch                                         |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Im to old for this saying but in this case...DANGG  |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Yummy                                               |
+| It's the freakin' weekend. Shot by IGer @orijusg.   |                                                     |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Need all of it now!!                                |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | yummy                                               |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Doooo you deliver!!!!!                              |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Kelly Mikunda would love one right about now!!      |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | 🍔🍻                                                |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Jem Collier 3 more days                             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Itzel Hernandez for us 😱💙💙💙                     |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Joshua Quisenberry lunch?                           |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Sohan Kalsi Parshva Shah Nikki Sharma soon!!!!      |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Regina Napier                                       |
+| Crinkle, crinkle little star. Our classic crinkle   | Those fries look so good !! And I'm hungry right n  |
+| Crinkle, crinkle little star. Our classic crinkle   | Fries are great where's the beef                    |
+| Crinkle, crinkle little star. Our classic crinkle   | My tablet is drooling.                              |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy fries                                         |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy! Love me some crinkle cut fries!😝            |
+| Crinkle, crinkle little star. Our classic crinkle   |                                                     |
+| Crinkle, crinkle little star. Our classic crinkle   | Um munchies                                         |
++-----------------------------------------------------+-----------------------------------------------------+
+50 rows selected (6.194 seconds)
+```
+You can use the <b>where</b> clause and <b>lower</b> function to filter results. In this query, we find the comments that contain the word “fries”, regardless of capitalization and display original message and comment. Cheese fries will start to sound good.
+```
+0: jdbc:drill:zk=local> select substr(f.message,1,70) `message`,
+  substr(f.comment.message,1,50) `comment` from 
+   (
+    select 
+      substr(t.flatdata.message,1,50) `message`,
+      flatten(t.flatdata.comments.data) `comment`
+      from 
+      (select flatten(data) as flatdata from
+        dfs.`/Users/joeblue/sentiment/burger.json`
+      ) t
+   ) f
+ where lower(f.comment.message) like '%fries%'
+ limit 50;
++-----------------------------------------------------+-----------------------------------------------------+
+|                       message                       |                       comment                       |
++-----------------------------------------------------+-----------------------------------------------------+
+| Crinkle, crinkle little star. Our classic crinkle   | Those fries look so good !! And I'm hungry right n  |
+| Crinkle, crinkle little star. Our classic crinkle   | Fries are great where's the beef                    |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy fries                                         |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy! Love me some crinkle cut fries!😝            |
+| Dive in it. Photo by IGer @papercupwords.           | Where's cheese fries?                               |
+| Dive in it. Photo by IGer @papercupwords.           | Love crinkle cut fries.                             |
+| Sun's out, buns out. Photo by grammer @keepingupwi  | I want cheese fries 😩 Kathleen Keen                |
++-----------------------------------------------------+-----------------------------------------------------+
+```
+Once you use flatten to split up the list of comments, you can use the traditional aggregrations like group by, count, etc.  
+```
+0: jdbc:drill:zk=local> select substr(x.message,1,50) `message`, count(*) `numComments`
+   from ( select
+      t.flatdata.message `message`,
+      flatten(t.flatdata.comments.data) `comment`
+      from 
+      (select flatten(data) as flatdata from
+        dfs.`/Users/joeblue/sentiment/burger.json`
+      ) t
+   ) x
+   group by message;
++-----------------------------------------------------+--------------+
+|                       message                       | numComments  |
++-----------------------------------------------------+--------------+
+| WhoSay's Rob Gregory is having a delicious convers  | 2            |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | 25           |
+| At the Flyers Game -Burger was cold - small portio  | 1            |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | 15           |
+| Crinkle, crinkle little star. Our classic crinkle   | 9            |
+| Just the two of us. Photo by IGer @sineunknown.     | 21           |
+| I went to the one in Paramus New Jersey. NEVER NEV  | 1            |
+| Shake Shack crew working at 6:07pm in JFK airport   | 1            |
+| Dive in it. Photo by IGer @papercupwords.           | 25           |
+| Congratulations to Shake Shack for winning the Chi  | 7            |
+| Golden and Silver restaurants in Beirut as classif  | 2            |
+| Make room for 'Shroom. Photo by IGer @revelationth  | 13           |
+| We are almost 50% booked for our 24 hours of [soli  | 2            |
+| Sun's out, buns out. Photo by grammer @keepingupwi  | 25           |
+| Just in time for the Philadelphia Flyers home open  | 24           |
+| Please please please open a location in Louisiana   | 2            |
+| If there is vacancy job please, am not a lazy type  | 1            |
+| Please build a store in Cherry Hill, NJ             | 1            |
++-----------------------------------------------------+--------------+
+```
+Seems like if we wanted to count the number of likes per comment on each message we would have to add another layer of nesting, then aggregate, but examination of the format shows that the field <b>like_count</b> already exists. 
+```
+0: jdbc:drill:zk=local> select substr(f.message,1,70) `message`,
+  substr(f.comment.message,1,50) `comment`,
+  f.comment.like_count `commentLikes` from 
+   (
+    select 
+      substr(t.flatdata.message,1,50) `message`,
+      flatten(t.flatdata.comments.data) `comment`
+      from 
+      (select flatten(data) as flatdata from
+        dfs.`/Users/joeblue/sentiment/burger.json`
+      ) t
+   ) f
+ limit 50;
++-----------------------------------------------------+-----------------------------------------------------+---------------+
+|                       message                       |                       comment                       | commentLikes  |
++-----------------------------------------------------+-----------------------------------------------------+---------------+
+| WhoSay's Rob Gregory is having a delicious convers  | Will you guys ever put a shake shack in the coney   | 0             |
+| WhoSay's Rob Gregory is having a delicious convers  | Hey                                                 | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Please stop sharing stuff like this!!!! I am starv  | 1             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Yassssss Moises Castillo finally something i might  | 1             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Crispy, sexy, crinkly, yummy.                       | 1             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Omg! I will tear this thing up!                     | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  |                                                     | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | I need this 😍                                      | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Well that's a giant chicken sandwich.               | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Is that chicken?  Wow that looks goooood            | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | This is so, darn good.                              | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Cluck, cluck baby.                                  | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Osgood                                              | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  |                                                     | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Looks so good.                                      | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | That is what up i can get down on one them          | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Do you deliver!!!                                   | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | My fantasy                                          | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Samah Khasawneh T5aiale heeik Akel w 2a3deh 3ndk b  | 1             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | DAAAAMN!!!!                                         | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | I can taste the crispy                              | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | looks like the Big Shack                            | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Kimberly Hitt I need this in my life                | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Mmmm                                                | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Jermaine Jenkins love me some Shake Shack!!         | 1             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Mmmmmmm....                                         | 0             |
+| Cluck yeah. Chick'n Shack shot by grammer @tinaaea  | Margarita Nava Aguilar, una idea para el domingo.   | 0             |
+| At the Flyers Game -Burger was cold - small portio  | Hi there! Would you mind sending us an email at sh  | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Every bite is the weekend.                          | 1             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Steffi Loch                                         | 1             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Im to old for this saying but in this case...DANGG  | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Yummy                                               | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   |                                                     | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Need all of it now!!                                | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | yummy                                               | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Doooo you deliver!!!!!                              | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Kelly Mikunda would love one right about now!!      | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | 🍔🍻                                                | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Jem Collier 3 more days                             | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Itzel Hernandez for us 😱💙💙💙                     | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Joshua Quisenberry lunch?                           | 0             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Sohan Kalsi Parshva Shah Nikki Sharma soon!!!!      | 1             |
+| It's the freakin' weekend. Shot by IGer @orijusg.   | Regina Napier                                       | 0             |
+| Crinkle, crinkle little star. Our classic crinkle   | Those fries look so good !! And I'm hungry right n  | 1             |
+| Crinkle, crinkle little star. Our classic crinkle   | Fries are great where's the beef                    | 0             |
+| Crinkle, crinkle little star. Our classic crinkle   | My tablet is drooling.                              | 1             |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy fries                                         | 0             |
+| Crinkle, crinkle little star. Our classic crinkle   | Yummy! Love me some crinkle cut fries!😝            | 0             |
+| Crinkle, crinkle little star. Our classic crinkle   |                                                     | 0             |
+| Crinkle, crinkle little star. Our classic crinkle   | Um munchies                                         | 0             |
++-----------------------------------------------------+-----------------------------------------------------+---------------+
+```
 
 
